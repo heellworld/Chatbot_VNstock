@@ -2,6 +2,10 @@
 
 Chatbot VNStock là một ứng dụng trí tuệ nhân tạo hỗ trợ phân tích cổ phiếu trên thị trường Việt Nam. Dự án kết hợp giữa công nghệ xử lý ngôn ngữ tự nhiên, phân tích dữ liệu và ETL tự động thông qua Apache Airflow.
 
+<p align="center">
+  <img src="./Framework_Vn30.png" alt="Framework VN30" width="700"/>
+</p>
+
 ## 📋 Tính Năng
 
 - 🤖 Chatbot thông minh hỗ trợ trả lời câu hỏi về cổ phiếu 
