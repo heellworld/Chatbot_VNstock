@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Framework Hệ Thống Phân Tích Tài Chính VN30</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            padding: 40px;
+        }
+        
+        .title {
+            text-align: center;
+            color: #2c3e50;
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 50px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+        }
+        
+        .phase {
+            margin-bottom: 40px;
+            border: 3px dashed #3498db;
+            border-radius: 15px;
+            padding: 30px;
+            position: relative;
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+        }
+        
+        .phase-title {
+            position: absolute;
+            top: -18px;
+            left: 25px;
+            background: #3498db;
+            color: white;
+            padding: 10px 25px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 18px;
+            box-shadow: 0 4px 8px rgba(52, 152, 219, 0.3);
+        }
+        
+        .phase-content {
+            margin-top: 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .box {
+            background: white;
+            border: 2px solid #34495e;
+            border-radius: 12px;
+            padding: 18px 25px;
+            text-align: center;
+            font-weight: 600;
+            color: #2c3e50;
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            min-width: 180px;
+            position: relative;
+        }
+        
+        .box:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+        }
+        
+        .data-source {
+            background: linear-gradient(145deg, #ff7675, #fd79a8);
+            color: white;
+            border-color: #e84393;
+            flex: 1;
+            max-width: 300px;
+        }
+        
+        .etl-step {
+            background: linear-gradient(145deg, #00b894, #00cec9);
+            color: white;
+            border-color: #00a085;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .view-box {
+            background: linear-gradient(145deg, #fdcb6e, #e17055);
+            color: white;
+            border-color: #d63031;
+            flex: 1;
+            min-width: 160px;
+        }
+        
+        .agent-box {
+            background: linear-gradient(145deg, #a29bfe, #6c5ce7);
+            color: white;
+            border-color: #5f3dc4;
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .arrow-down {
+            text-align: center;
+            margin: 20px 0;
+            font-size: 36px;
+            color: #3498db;
+            animation: bounce 2s infinite;
+        }
+        
+        .arrow-right {
+            font-size: 28px;
+            color: #3498db;
+            font-weight: bold;
+            margin: 0 15px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% {
+                transform: translateY(0);
+            }
+            40% {
+                transform: translateY(-10px);
+            }
+            60% {
+                transform: translateY(-5px);
+            }
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.2);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .workflow {
+            background: linear-gradient(145deg, #f8f9fa, #e9ecef);
+            border: 2px solid #6c757d;
+            border-radius: 15px;
+            padding: 25px;
+            margin-top: 20px;
+        }
+        
+        .workflow-title {
+            font-weight: bold;
+            color: #495057;
+            margin-bottom: 20px;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+        .workflow-flow {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin: 15px 0;
+        }
+        
+        .step-box {
+            background: linear-gradient(145deg, #ffffff, #f8f9fa);
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 12px 18px;
+            font-weight: 600;
+            color: #495057;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .step-box:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+        
+        .combine-box {
+            background: linear-gradient(145deg, #74b9ff, #0984e3);
+            color: white;
+            border-color: #0984e3;
+            font-size: 16px;
+            padding: 15px 25px;
+        }
+        
+        .final-box {
+            background: linear-gradient(145deg, #2d3436, #636e72);
+            color: white;
+            border-color: #2d3436;
+            font-size: 20px;
+            padding: 25px;
+            margin-top: 30px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+            justify-content: center;
+        }
+        
+        .tech-item {
+            background: linear-gradient(145deg, #e3f2fd, #bbdefb);
+            color: #1565c0;
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 13px;
+            border: 1px solid #90caf9;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: scale(1.05);
+            background: linear-gradient(145deg, #bbdefb, #90caf9);
+        }
+        
+        .connection-line {
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2980b9);
+            margin: 20px 0;
+            border-radius: 2px;
+            position: relative;
+        }
+        
+        .connection-line::after {
+            content: '';
+            position: absolute;
+            right: 0;
+            top: -5px;
+            width: 0;
+            height: 0;
+            border-left: 10px solid #2980b9;
+            border-top: 6px solid transparent;
+            border-bottom: 6px solid transparent;
+        }
+        
+        .phase-connector {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 25px 0;
+        }
+        
+        .connector-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3498db, #2980b9);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">Framework Hệ Thống Phân Tích Tài Chính VN30</div>
+        
+        <!-- Phase 1: Data Collection -->
+        <div class="phase">
+            <div class="phase-title">1. Thu Thập Dữ Liệu</div>
+            <div class="phase-content">
+                <div class="box data-source">
+                    <strong>Nguồn Dữ Liệu VN30</strong><br><br>
+                    • Dữ liệu giá chứng khoán<br>
+                    • Chỉ số tài chính công ty<br>
+                    • Thông tin doanh nghiệp<br><br>
+                    <div class="tech-stack">
+                        <span class="tech-item">Vnstock API</span>
+                        <span class="tech-item">Real-time Data</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="phase-connector">
+            <div class="connector-circle">↓</div>
+        </div>
+        
+        <!-- Phase 2: ETL Process -->
+        <div class="phase">
+            <div class="phase-title">2. ETL Process với Airflow</div>
+            <div class="phase-content">
+                <div class="etl-step">
+                    <strong>EXTRACT</strong><br><br>
+                    • Quote Data<br>
+                    • Finance Data<br>
+                    • Company Data<br>
+                    • Definition Data
+                </div>
+                <div class="arrow-right">→</div>
+                <div class="etl-step">
+                    <strong>TRANSFORM</strong><br><br>
+                    • Đổi kiểu dữ liệu<br>
+                    • Đổi tên cột<br>
+                    • Loại bỏ trùng lặp<br>
+                    • Xử lý null values<br>
+                    • Xóa ký tự thừa
+                </div>
+                <div class="arrow-right">→</div>
+                <div class="etl-step">
+                    <strong>LOAD</strong><br><br>
+                    • Data Warehouse<br>
+                    • Structured Tables<br>
+                    • Optimized Storage
+                </div>
+            </div>
+            <div class="connection-line"></div>
+            <div class="tech-stack">
+                <span class="tech-item">Apache Airflow</span>
+                <span class="tech-item">Data Pipeline</span>
+                <span class="tech-item">SQL</span>
+                <span class="tech-item">Data Warehouse</span>
+            </div>
+        </div>
+        
+        <div class="phase-connector">
+            <div class="connector-circle">↓</div>
+        </div>
+        
+        <!-- Phase 3: Data Processing -->
+        <div class="phase">
+            <div class="phase-title">3. Xử Lý Dữ Liệu & Tạo Views</div>
+            <div class="phase-content">
+                <div class="view-box">
+                    <strong>View Tổng Hợp</strong><br>
+                    Giá Chứng Khoán
+                </div>
+                <div class="view-box">
+                    <strong>View Chỉ Số</strong><br>
+                    Tài Chính Theo Quý
+                </div>
+                <div class="view-box">
+                    <strong>View Phân Tích</strong><br>
+                    Biến Động Giá
+                </div>
+                <div class="view-box">
+                    <strong>View VN30</strong><br>
+                    Performance
+                </div>
+            </div>
+            <div class="connection-line"></div>
+            <div class="tech-stack">
+                <span class="tech-item">SQL Views</span>
+                <span class="tech-item">Data Aggregation</span>
+                <span class="tech-item">Performance Optimization</span>
+            </div>
+        </div>
+        
+        <div class="phase-connector">
+            <div class="connector-circle">↓</div>
+        </div>
+        
+        <!-- Phase 4: LLM Agent System -->
+        <div class="phase">
+            <div class="phase-title">4. Hệ Thống Agent LLM</div>
+            <div class="phase-content">
+                <div class="agent-box">
+                    <strong>Agent 1</strong><br><br>
+                    Truy vấn báo cáo<br>
+                    tài chính<br><br>
+                    <div class="tech-stack">
+                        <span class="tech-item">Financial Reports</span>
+                    </div>
+                </div>
+                <div class="agent-box">
+                    <strong>Agent 2</strong><br><br>
+                    Truy xuất dữ liệu<br>
+                    từ Data Warehouse<br><br>
+                    <div class="tech-stack">
+                        <span class="tech-item">Function Calling</span>
+                    </div>
+                </div>
+                <div class="agent-box">
+                    <strong>Agent 3</strong><br><br>
+                    Phân tích và<br>
+                    đưa ra khuyến nghị<br><br>
+                    <div class="tech-stack">
+                        <span class="tech-item">Analysis Engine</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="workflow">
+                <div class="workflow-title">🔄 Workflow Thực Thi</div>
+                
+                <div class="workflow-flow">
+                    <div class="step-box">Query User</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Agent 1</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Response 1</div>
+                </div>
+                
+                <div class="workflow-flow">
+                    <div class="step-box">Query User</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Agent 2</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Response 2</div>
+                </div>
+                
+                <div class="arrow-down">↓</div>
+                
+                <div class="workflow-flow">
+                    <div class="combine-box">
+                        <strong>🔗 Kết Hợp Dữ Liệu</strong><br>
+                        Response 1 + Response 2 → Formatted Prompt
+                    </div>
+                </div>
+                
+                <div class="arrow-down">↓</div>
+                
+                <div class="workflow-flow">
+                    <div class="step-box">Formatted Prompt</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Agent 3</div>
+                    <div class="arrow-right">→</div>
+                    <div class="step-box">Final Analysis</div>
+                </div>
+            </div>
+            
+            <div class="connection-line"></div>
+            <div class="tech-stack">
+                <span class="tech-item">LlamaIndex</span>
+                <span class="tech-item">GPT-4</span>
+                <span class="tech-item">SimpleChatEngine</span>
+                <span class="tech-item">Function Calling</span>
+                <span class="tech-item">Multi-Agent System</span>
+            </div>
+        </div>
+        
+        <div class="phase-connector">
+            <div class="connector-circle">✓</div>
+        </div>
+        
+        <!-- Final Output -->
+        <div class="final-box">
+            <strong>🎯 KẾT QUẢ CUỐI CÙNG</strong><br><br>
+            Phân tích tài chính chuyên sâu và khuyến nghị đầu tư thông minh cho VN30<br>
+            <small style="opacity: 0.8;">Dựa trên dữ liệu thời gian thực và phân tích AI tiên tiến</small>
+        </div>
+    </div>
+</body>
+</html>

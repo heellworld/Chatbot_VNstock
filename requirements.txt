@@ -1,0 +1,36 @@
+# Xử lý dữ liệu
+pandas
+numpy
+python-dotenv
+sqlalchemy
+pyspark
+apache-airflow
+vnstock
+alembic
+streamlit
+asyncpg
+# API và backend
+fastapi
+uvicorn
+pydantic
+sqlmodel
+
+# Chatbot và NLP
+langchain
+llama-index
+openai
+llama-index-core
+# Visualization và frontend
+matplotlib
+seaborn
+
+llama-index-vector-stores-postgres
+llama-index-embeddings-huggingface
+llama-index-embeddings-openai
+llama-index-readers-llama-parse 
+llama-index-llms-gemini
+llama-index-llms-ollama
+llama-index-llms-openai 
+
+
+
